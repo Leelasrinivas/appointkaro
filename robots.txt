@@ -1,0 +1,14 @@
+User-agent: *
+Allow: /
+
+# Allow all search engines to access the site
+User-agent: *
+Disallow:
+
+# Sitemap location
+Sitemap: https://appointkaro.com/sitemap.xml
+
+# Disallow crawling of admin sections
+User-agent: *
+Disallow: /admin/
+Disallow: /wp-admin/

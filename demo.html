@@ -1,0 +1,996 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AppointKaro Doctor Booking Demo</title>
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Font Awesome for icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <style>
+    :root {
+      --primary: #7922FF;
+      --primary-light: #8E47FF;
+      --primary-dark: #5A0CC9;
+      --secondary: #FF6D59;
+      --secondary-light: #FF8975;
+      --secondary-dark: #D74E3A;
+      --success: #22c55e;
+      --warning: #f59e0b;
+      --danger: #ef4444;
+      --white: #FFFFFF;
+      --black: #000000;
+      --gray-100: #F3F4F6;
+      --gray-200: #E5E7EB;
+      --gray-300: #D1D5DB;
+      --gray-400: #9CA3AF;
+      --gray-500: #6B7280;
+      --gray-600: #4B5563;
+      --gray-700: #374151;
+      --gray-800: #1F2937;
+      --gray-900: #111827;
+      --font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+      --border-radius: 0.5rem;
+      --border-radius-lg: 1rem;
+      --shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+      --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    html {
+      scroll-behavior: smooth;
+      font-size: 16px;
+    }
+    
+    body {
+      font-family: var(--font-family);
+      color: var(--gray-800);
+      background-color: var(--gray-100);
+      line-height: 1.6;
+      overflow-x: hidden;
+      min-height: 100vh;
+      position: relative;
+    }
+    
+    .demo-page {
+      padding: 2rem 0;
+      min-height: 100vh;
+      background: linear-gradient(135deg, rgba(240, 240, 255, 0.95) 0%, rgba(250, 245, 255, 0.95) 100%);
+      position: relative;
+    }
+    
+    .futuristic-bg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+      overflow: hidden;
+    }
+    
+    .gradient-orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(60px);
+      opacity: 0.2;
+    }
+    
+    .orb1 {
+      top: 20%;
+      right: 10%;
+      width: 300px;
+      height: 300px;
+      background: radial-gradient(circle, var(--primary-light) 0%, transparent 70%);
+      animation: float 20s ease-in-out infinite;
+    }
+    
+    .orb2 {
+      bottom: 10%;
+      left: 15%;
+      width: 250px;
+      height: 250px;
+      background: radial-gradient(circle, var(--secondary-light) 0%, transparent 70%);
+      animation: float 15s ease-in-out infinite reverse;
+    }
+    
+    .grid-lines {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: 
+        linear-gradient(to right, rgba(121, 34, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(121, 34, 255, 0.03) 1px, transparent 1px);
+      background-size: 40px 40px;
+      background-position: center;
+    }
+    
+    @keyframes float {
+      0%, 100% {
+        transform: translate(0, 0) rotate(0deg);
+      }
+      25% {
+        transform: translate(20px, 20px) rotate(5deg);
+      }
+      50% {
+        transform: translate(0, 40px) rotate(0deg);
+      }
+      75% {
+        transform: translate(-20px, 20px) rotate(-5deg);
+      }
+    }
+    
+    .container {
+      width: 100%;
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+      position: relative;
+      z-index: 10;
+    }
+    
+    .booking-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 2rem;
+    }
+    
+    .back-button {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--primary);
+      font-weight: 500;
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+    
+    .back-button:hover {
+      transform: translateX(-5px);
+    }
+    
+    .booking-logo {
+      display: flex;
+      align-items: center;
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--primary);
+    }
+    
+    .logo-text {
+      background: linear-gradient(to right, var(--primary), var(--secondary));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    
+    .booking-content {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    
+    .booking-card {
+      background-color: white;
+      border-radius: var(--border-radius-lg);
+      box-shadow: var(--shadow-lg);
+      overflow: hidden;
+    }
+    
+    .booking-steps {
+      display: flex;
+      justify-content: space-between;
+      padding: 1.5rem 2rem;
+      background: linear-gradient(to right, var(--primary-light), var(--primary));
+    }
+    
+    .booking-step {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+      z-index: 1;
+      color: rgba(255, 255, 255, 0.6);
+    }
+    
+    .step-number {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      background-color: rgba(255, 255, 255, 0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      position: relative;
+      z-index: 5;
+    }
+    
+    .step-label {
+      font-size: 0.85rem;
+      font-weight: 500;
+    }
+    
+    .booking-step.active {
+      color: white;
+    }
+    
+    .booking-step.active .step-number {
+      background-color: white;
+      color: var(--primary);
+    }
+    
+    .booking-step.completed .step-number {
+      background-color: var(--secondary);
+      color: white;
+    }
+    
+    .booking-step.completed {
+      color: rgba(255, 255, 255, 0.9);
+    }
+    
+    .step-connector {
+      position: absolute;
+      top: 15px;
+      height: 2px;
+      background-color: rgba(255, 255, 255, 0.3);
+      width: calc(100% - 60px);
+      left: 30px;
+      z-index: 0;
+    }
+    
+    .step-progress {
+      position: absolute;
+      top: 15px;
+      height: 2px;
+      background-color: var(--secondary);
+      width: 0;
+      left: 30px;
+      transition: width 0.5s ease;
+      z-index: 1;
+    }
+    
+    .booking-body {
+      padding: 2rem;
+    }
+    
+    .booking-title {
+      font-size: 1.5rem;
+      margin-bottom: 1.5rem;
+      color: var(--gray-900);
+    }
+    
+    .specialist-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+    }
+    
+    .specialist-card {
+      border: 2px solid var(--gray-200);
+      border-radius: var(--border-radius);
+      padding: 1.5rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      position: relative;
+    }
+    
+    .specialist-card:hover {
+      border-color: var(--primary-light);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    }
+    
+    .specialist-card.selected {
+      border-color: var(--primary);
+      background-color: rgba(121, 34, 255, 0.05);
+    }
+    
+    .specialist-card.disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      background-color: var(--gray-100);
+    }
+    
+    .specialist-title {
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+    
+    .specialist-price {
+      color: var(--primary);
+      font-weight: 500;
+      margin-bottom: 1rem;
+    }
+    
+    .specialist-availability {
+      font-size: 0.85rem;
+      color: var(--success);
+    }
+    
+    .specialist-unavailable {
+      font-size: 0.85rem;
+      color: var(--danger);
+    }
+    
+    .radio-mark {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      width: 20px;
+      height: 20px;
+      border: 2px solid var(--gray-300);
+      border-radius: 50%;
+      transition: all 0.3s ease;
+    }
+    
+    .specialist-card.selected .radio-mark {
+      border-color: var(--primary);
+      background-color: var(--primary);
+      box-shadow: inset 0 0 0 4px white;
+    }
+    
+    .time-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+    
+    .time-slot {
+      border: 1px solid var(--gray-300);
+      border-radius: var(--border-radius);
+      padding: 0.75rem 0.5rem;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    
+    .time-slot:hover {
+      border-color: var(--primary-light);
+      background-color: rgba(121, 34, 255, 0.05);
+    }
+    
+    .time-slot.selected {
+      border-color: var(--primary);
+      background-color: var(--primary);
+      color: white;
+    }
+    
+    .time-slot.disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      background-color: var(--gray-100);
+    }
+    
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+    
+    .form-label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 500;
+      color: var(--gray-700);
+    }
+    
+    .form-control {
+      width: 100%;
+      padding: 0.75rem 1rem;
+      border: 1px solid var(--gray-300);
+      border-radius: var(--border-radius);
+      font-size: 1rem;
+      transition: border-color 0.3s ease;
+    }
+    
+    .form-control:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(121, 34, 255, 0.1);
+    }
+    
+    .booking-actions {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 2rem;
+    }
+    
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.75rem 1.5rem;
+      border-radius: var(--border-radius);
+      font-weight: 500;
+      transition: all 0.3s ease;
+      cursor: pointer;
+      border: none;
+      text-decoration: none;
+    }
+    
+    .btn-primary {
+      background: linear-gradient(to right, var(--primary), var(--secondary));
+      color: white;
+      box-shadow: 0 4px 6px rgba(121, 34, 255, 0.2);
+    }
+    
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 10px rgba(121, 34, 255, 0.3);
+    }
+    
+    .btn-secondary {
+      background-color: white;
+      color: var(--primary);
+      border: 1px solid var(--primary);
+    }
+    
+    .btn-secondary:hover {
+      background-color: var(--gray-100);
+    }
+    
+    .booking-confirmation {
+      text-align: center;
+      padding: 2rem;
+    }
+    
+    .confirmation-icon {
+      width: 80px;
+      height: 80px;
+      background-color: var(--success);
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      margin: 0 auto 2rem;
+    }
+    
+    .confirmation-title {
+      font-size: 1.75rem;
+      margin-bottom: 1rem;
+      color: var(--gray-900);
+    }
+    
+    .confirmation-message {
+      font-size: 1.1rem;
+      max-width: 500px;
+      margin: 0 auto 2rem;
+      color: var(--gray-600);
+    }
+    
+    .appointment-details {
+      background-color: var(--gray-100);
+      border-radius: var(--border-radius);
+      padding: 1.5rem;
+      max-width: 500px;
+      margin: 0 auto 2rem;
+      text-align: left;
+    }
+    
+    .detail-group {
+      display: flex;
+      margin-bottom: 1rem;
+    }
+    
+    .detail-label {
+      flex: 1;
+      font-weight: 500;
+      color: var(--gray-700);
+    }
+    
+    .detail-value {
+      flex: 2;
+      color: var(--gray-900);
+    }
+    
+    .booking-step-content {
+      display: none;
+    }
+    
+    .booking-step-content.active {
+      display: block;
+    }
+    
+    .success-actions {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+    
+    .calendar-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    
+    /* Alert Styles */
+    .demo-alert {
+      position: fixed;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: white;
+      border-left: 4px solid var(--primary);
+      padding: 1rem 1.5rem;
+      border-radius: var(--border-radius);
+      box-shadow: var(--shadow-lg);
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      max-width: 400px;
+      width: 90%;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+    }
+    
+    .demo-alert.show {
+      opacity: 1;
+      visibility: visible;
+    }
+    
+    .demo-alert-icon {
+      flex-shrink: 0;
+      color: var(--primary);
+      font-size: 1.25rem;
+    }
+    
+    .demo-alert-content {
+      flex: 1;
+    }
+    
+    .demo-alert-title {
+      font-weight: 600;
+      margin-bottom: 0.25rem;
+    }
+    
+    .demo-alert-message {
+      font-size: 0.9rem;
+      color: var(--gray-600);
+    }
+    
+    .demo-alert-close {
+      flex-shrink: 0;
+      background: none;
+      border: none;
+      font-size: 1.1rem;
+      color: var(--gray-500);
+      cursor: pointer;
+    }
+    
+    /* Mobile Responsiveness */
+    @media (max-width: 768px) {
+      .booking-steps {
+        padding: 1rem;
+      }
+      
+      .step-label {
+        font-size: 0.75rem;
+      }
+      
+      .specialist-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .booking-actions {
+        flex-direction: column;
+        gap: 1rem;
+      }
+      
+      .booking-actions .btn {
+        width: 100%;
+      }
+      
+      .btn-secondary {
+        order: 2;
+      }
+      
+      .success-actions {
+        flex-direction: column;
+      }
+      
+      .success-actions .btn {
+        width: 100%;
+      }
+    }
+    
+    @media (max-width: 576px) {
+      .booking-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+      }
+      
+      .booking-title {
+        font-size: 1.25rem;
+      }
+      
+      .time-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="demo-page">
+    <div class="futuristic-bg">
+      <div class="gradient-orb orb1"></div>
+      <div class="gradient-orb orb2"></div>
+      <div class="grid-lines"></div>
+    </div>
+    
+    <div class="container">
+      <header class="booking-header">
+        <a href="/" class="back-button">
+          <i class="fas fa-arrow-left"></i>
+          Back to AppointKaro
+        </a>
+        <div class="booking-logo">
+          <span class="logo-text">AppointKaro</span>
+        </div>
+      </header>
+      
+      <div class="booking-content">
+        <div class="booking-card">
+          <div class="booking-steps">
+            <div class="step-connector"></div>
+            <div class="step-progress"></div>
+            
+            <div class="booking-step active" data-step="1">
+              <div class="step-number">1</div>
+              <div class="step-label">Service</div>
+            </div>
+            
+            <div class="booking-step" data-step="2">
+              <div class="step-number">2</div>
+              <div class="step-label">Schedule</div>
+            </div>
+            
+            <div class="booking-step" data-step="3">
+              <div class="step-number">3</div>
+              <div class="step-label">Details</div>
+            </div>
+            
+            <div class="booking-step" data-step="4">
+              <div class="step-number">4</div>
+              <div class="step-label">Confirm</div>
+            </div>
+          </div>
+          
+          <div class="booking-body">
+            <!-- Step 1: Select Service -->
+            <div class="booking-step-content active" data-step="1">
+              <h2 class="booking-title">Select Specialist</h2>
+              
+              <div class="specialist-grid">
+                <div class="specialist-card selected" data-specialist="general-physician">
+                  <div class="radio-mark"></div>
+                  <h3 class="specialist-title">General Physician</h3>
+                  <div class="specialist-price">₹500</div>
+                  <div class="specialist-availability">Available Today</div>
+                </div>
+                
+                <div class="specialist-card" data-specialist="pediatrician">
+                  <div class="radio-mark"></div>
+                  <h3 class="specialist-title">Pediatrician</h3>
+                  <div class="specialist-price">₹800</div>
+                  <div class="specialist-availability">Available Tomorrow</div>
+                </div>
+                
+                <div class="specialist-card disabled" data-specialist="orthopedic">
+                  <div class="radio-mark"></div>
+                  <h3 class="specialist-title">Orthopedic Specialist</h3>
+                  <div class="specialist-price">₹1,200</div>
+                  <div class="specialist-unavailable">Not Available</div>
+                </div>
+                
+                <div class="specialist-card" data-specialist="dermatologist">
+                  <div class="radio-mark"></div>
+                  <h3 class="specialist-title">Dermatologist</h3>
+                  <div class="specialist-price">₹1,000</div>
+                  <div class="specialist-availability">Available on Friday</div>
+                </div>
+              </div>
+              
+              <div class="booking-actions">
+                <a href="/" class="btn btn-secondary">Cancel</a>
+                <button class="btn btn-primary next-step" data-next="2">Continue <i class="fas fa-arrow-right"></i></button>
+              </div>
+            </div>
+            
+            <!-- Step 2: Select Time -->
+            <div class="booking-step-content" data-step="2">
+              <h2 class="booking-title">Select Date & Time</h2>
+              
+              <div class="form-group">
+                <label class="form-label">Select Date</label>
+                <select class="form-control">
+                  <option value="today">Today (May 19, 2025)</option>
+                  <option value="tomorrow">Tomorrow (May 20, 2025)</option>
+                  <option value="dayafter">Day After (May 21, 2025)</option>
+                </select>
+              </div>
+              
+              <div class="form-group">
+                <label class="form-label">Select Time Slot</label>
+                <div class="time-grid">
+                  <div class="time-slot disabled">9:00 AM</div>
+                  <div class="time-slot disabled">10:00 AM</div>
+                  <div class="time-slot">11:00 AM</div>
+                  <div class="time-slot">12:00 PM</div>
+                  <div class="time-slot disabled">1:00 PM</div>
+                  <div class="time-slot selected">3:30 PM</div>
+                  <div class="time-slot">4:30 PM</div>
+                  <div class="time-slot">5:30 PM</div>
+                </div>
+              </div>
+              
+              <div class="booking-actions">
+                <button class="btn btn-secondary prev-step" data-prev="1">Back</button>
+                <button class="btn btn-primary next-step" data-next="3">Continue <i class="fas fa-arrow-right"></i></button>
+              </div>
+            </div>
+            
+            <!-- Step 3: Enter Details -->
+            <div class="booking-step-content" data-step="3">
+              <h2 class="booking-title">Enter Your Details</h2>
+              
+              <div class="form-group">
+                <label class="form-label">Full Name</label>
+                <input type="text" class="form-control" placeholder="Enter your full name" value="John Doe">
+              </div>
+              
+              <div class="form-group">
+                <label class="form-label">Phone Number</label>
+                <input type="tel" class="form-control" placeholder="Enter your phone number" value="+91 9876543210">
+              </div>
+              
+              <div class="form-group">
+                <label class="form-label">Email Address</label>
+                <input type="email" class="form-control" placeholder="Enter your email address" value="john@example.com">
+              </div>
+              
+              <div class="form-group">
+                <label class="form-label">Reason for Visit</label>
+                <textarea class="form-control" rows="3" placeholder="Brief description of your health concern">Regular health checkup and consultation for mild fever</textarea>
+              </div>
+              
+              <div class="booking-actions">
+                <button class="btn btn-secondary prev-step" data-prev="2">Back</button>
+                <button class="btn btn-primary next-step" data-next="4">Review Booking <i class="fas fa-arrow-right"></i></button>
+              </div>
+            </div>
+            
+            <!-- Step 4: Confirmation -->
+            <div class="booking-step-content" data-step="4">
+              <div class="booking-confirmation">
+                <div class="confirmation-icon">
+                  <i class="fas fa-check"></i>
+                </div>
+                <h2 class="confirmation-title">Booking Confirmed!</h2>
+                <p class="confirmation-message">
+                  Your appointment has been successfully scheduled. We've sent a confirmation to your email and phone.
+                </p>
+                
+                <div class="appointment-details">
+                  <div class="detail-group">
+                    <div class="detail-label">Doctor:</div>
+                    <div class="detail-value">Dr. Sharma (General Physician)</div>
+                  </div>
+                  <div class="detail-group">
+                    <div class="detail-label">Date & Time:</div>
+                    <div class="detail-value">May 19, 2025 at 3:30 PM</div>
+                  </div>
+                  <div class="detail-group">
+                    <div class="detail-label">Location:</div>
+                    <div class="detail-value">Apollo Clinic, Bandra West, Mumbai</div>
+                  </div>
+                  <div class="detail-group">
+                    <div class="detail-label">Booking ID:</div>
+                    <div class="detail-value">AK8973215</div>
+                  </div>
+                </div>
+                
+                <div class="success-actions">
+                  <button class="btn btn-primary calendar-btn" id="addToCalendarBtn">
+                    <i class="fas fa-calendar-plus"></i> Add to Calendar
+                  </button>
+                  <a href="/" class="btn btn-secondary">
+                    <i class="fas fa-home"></i> Back to Home
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Progress bar
+      const stepProgress = document.querySelector('.step-progress');
+      const allSteps = document.querySelectorAll('.booking-step');
+      const allStepContents = document.querySelectorAll('.booking-step-content');
+      
+      // Initialize
+      updateProgress(1);
+      
+      // Specialist selection
+      const specialistCards = document.querySelectorAll('.specialist-card:not(.disabled)');
+      specialistCards.forEach(card => {
+        card.addEventListener('click', function() {
+          specialistCards.forEach(c => c.classList.remove('selected'));
+          this.classList.add('selected');
+        });
+      });
+      
+      // Time slot selection
+      const timeSlots = document.querySelectorAll('.time-slot:not(.disabled)');
+      timeSlots.forEach(slot => {
+        slot.addEventListener('click', function() {
+          timeSlots.forEach(s => s.classList.remove('selected'));
+          this.classList.add('selected');
+        });
+      });
+      
+      // Next step buttons
+      const nextButtons = document.querySelectorAll('.next-step');
+      nextButtons.forEach(button => {
+        button.addEventListener('click', function() {
+          const nextStep = parseInt(this.getAttribute('data-next'));
+          
+          // Hide current step
+          allStepContents.forEach(content => content.classList.remove('active'));
+          
+          // Show next step
+          document.querySelector(`.booking-step-content[data-step="${nextStep}"]`).classList.add('active');
+          
+          // Update progress
+          updateProgress(nextStep);
+        });
+      });
+      
+      // Previous step buttons
+      const prevButtons = document.querySelectorAll('.prev-step');
+      prevButtons.forEach(button => {
+        button.addEventListener('click', function() {
+          const prevStep = parseInt(this.getAttribute('data-prev'));
+          
+          // Hide current step
+          allStepContents.forEach(content => content.classList.remove('active'));
+          
+          // Show previous step
+          document.querySelector(`.booking-step-content[data-step="${prevStep}"]`).classList.add('active');
+          
+          // Update progress
+          updateProgress(prevStep);
+        });
+      });
+      
+      // Add to Calendar button
+      const addToCalendarBtn = document.getElementById('addToCalendarBtn');
+      if (addToCalendarBtn) {
+        addToCalendarBtn.addEventListener('click', function() {
+          // Create calendar event details
+          const appointmentDate = new Date(2025, 4, 19, 15, 30); // May 19, 2025, 3:30 PM
+          const endTime = new Date(appointmentDate.getTime() + 30 * 60000); // 30 minutes later
+          
+          const event = {
+            title: 'Doctor Appointment: Dr. Sharma',
+            location: 'Apollo Clinic, Bandra West, Mumbai',
+            description: 'Regular health checkup and consultation for mild fever',
+            start: appointmentDate.toISOString(),
+            end: endTime.toISOString()
+          };
+          
+          // Show success alert
+          showAlert('Calendar Event Added', 'Your appointment has been added to your calendar.', 'success');
+        });
+      }
+      
+      // Back button
+      const backButton = document.querySelector('.back-button');
+      if (backButton) {
+        backButton.addEventListener('click', function(e) {
+          e.preventDefault();
+          
+          showAlert('Demo Complete', 'Thank you for trying the AppointKaro booking demo!', 'info');
+          
+          setTimeout(() => {
+            window.location.href = '/';
+          }, 3000);
+        });
+      }
+      
+      // Function to update progress
+      function updateProgress(currentStep) {
+        // Update steps
+        allSteps.forEach(step => {
+          const stepNumber = parseInt(step.getAttribute('data-step'));
+          
+          if (stepNumber < currentStep) {
+            step.classList.remove('active');
+            step.classList.add('completed');
+          } else if (stepNumber === currentStep) {
+            step.classList.add('active');
+            step.classList.remove('completed');
+          } else {
+            step.classList.remove('active', 'completed');
+          }
+        });
+        
+        // Update progress bar width
+        const progressPercentage = ((currentStep - 1) / (allSteps.length - 1)) * 100;
+        stepProgress.style.width = `${progressPercentage}%`;
+      }
+      
+      // Show alert function
+      function showAlert(title, message, type = 'info') {
+        // Create alert element
+        const alert = document.createElement('div');
+        alert.className = 'demo-alert';
+        alert.innerHTML = `
+          <div class="demo-alert-icon">
+            <i class="fas fa-${type === 'success' ? 'check-circle' : 'info-circle'}"></i>
+          </div>
+          <div class="demo-alert-content">
+            <div class="demo-alert-title">${title}</div>
+            <div class="demo-alert-message">${message}</div>
+          </div>
+          <button class="demo-alert-close">
+            <i class="fas fa-times"></i>
+          </button>
+        `;
+        
+        document.body.appendChild(alert);
+        
+        // Show alert
+        setTimeout(() => {
+          alert.classList.add('show');
+        }, 100);
+        
+        // Add close button handler
+        const closeBtn = alert.querySelector('.demo-alert-close');
+        closeBtn.addEventListener('click', function() {
+          alert.classList.remove('show');
+          setTimeout(() => {
+            alert.remove();
+          }, 300);
+        });
+        
+        // Auto-hide after 5 seconds
+        setTimeout(() => {
+          if (document.body.contains(alert)) {
+            alert.classList.remove('show');
+            setTimeout(() => {
+              if (document.body.contains(alert)) {
+                alert.remove();
+              }
+            }, 300);
+          }
+        }, 5000);
+      }
+    });
+  </script>
+</body>
+</html>
