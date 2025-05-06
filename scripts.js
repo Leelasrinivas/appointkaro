@@ -178,20 +178,24 @@ document.addEventListener('DOMContentLoaded', function() {
     
     checkCalculatorAlert();
   
-    // Utility Functions
     function calculateTimeSaved(age, expectancy) {
-      // Average time wasted per appointment: 25 minutes
-      // Average time with AppointKaro: 2 minutes
-      // Time saved per appointment: 23 minutes
-      // Average appointments per year: 12 (monthly)
+      // If 70 years of life = 15 months of waiting time
+      // That's 15/70 = 0.214 months of waiting per year of life
+      // Or about 6.5 days of waiting per year (0.214 * 30)
       
-      const appointmentsPerYear = 12;
-      const minutesSavedPerAppointment = 23;
+      // For someone with yearsRemaining years left:
+      // Total waiting time they'll experience: yearsRemaining * 6.5 days
+      // With AppointKaro, we save 23/25 of that time (92%)
+      
       const yearsRemaining = expectancy - age;
+      const waitingDaysPerYear = 6.5; // ~15 months over 70 years converted to days per year
       
-      const totalMinutesSaved = yearsRemaining * appointmentsPerYear * minutesSavedPerAppointment;
-      const hoursSaved = totalMinutesSaved / 60;
-      const daysSaved = hoursSaved / 24;
+      // Total waiting days for remaining lifespan
+      const totalWaitingDays = yearsRemaining * waitingDaysPerYear;
+      
+      // AppointKaro saves 92% of that time (23 out of 25 minutes)
+      const daysSaved = totalWaitingDays * (23/25);
+      const hoursSaved = daysSaved * 24;
       const yearsSaved = daysSaved / 365;
       
       return {
@@ -205,3 +209,43 @@ document.addEventListener('DOMContentLoaded', function() {
       return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     }
   });
+
+  // Enhanced mobile menu toggle functionality
+document.addEventListener('DOMContentLoaded', function() {
+  const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+  const navList = document.querySelector('.nav-list');
+  const mainNav = document.querySelector('.main-nav');
+
+  if (mobileMenuBtn && mainNav) {
+    mobileMenuBtn.addEventListener('click', function(e) {
+      e.stopPropagation(); // Prevent event bubbling
+      
+      // Toggle classes for both the button and navigation
+      mobileMenuBtn.classList.toggle('active');
+      mainNav.classList.toggle('show');
+      
+      console.log('Mobile menu toggled:', mainNav.classList.contains('show')); // Debug info
+    });
+    
+    // Close menu when clicking elsewhere on the page
+    document.addEventListener('click', function(e) {
+      if (!mainNav.contains(e.target) && !mobileMenuBtn.contains(e.target)) {
+        mainNav.classList.remove('show');
+        mobileMenuBtn.classList.remove('active');
+      }
+    });
+    
+    // Prevent closing when clicking within the menu
+    mainNav.addEventListener('click', function(e) {
+      e.stopPropagation();
+    });
+    
+    // Close menu when window is resized to desktop size
+    window.addEventListener('resize', function() {
+      if (window.innerWidth > 768) {
+        mainNav.classList.remove('show');
+        mobileMenuBtn.classList.remove('active');
+      }
+    });
+  }
+});
