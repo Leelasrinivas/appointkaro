@@ -11,6 +11,7 @@
   
   <!-- Font Awesome for icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
   
   <style>
     :root {
@@ -189,79 +190,168 @@
       overflow: hidden;
     }
     
-    .booking-steps {
-      display: flex;
-      justify-content: space-between;
-      padding: 1.5rem 2rem;
-      background: linear-gradient(to right, var(--primary-light), var(--primary));
-    }
-    
-    .booking-step {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      position: relative;
-      z-index: 1;
-      color: rgba(255, 255, 255, 0.6);
-    }
-    
-    .step-number {
-      width: 30px;
-      height: 30px;
-      border-radius: 50%;
-      background-color: rgba(255, 255, 255, 0.2);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: 600;
-      margin-bottom: 0.5rem;
-      position: relative;
-      z-index: 5;
-    }
-    
-    .step-label {
-      font-size: 0.85rem;
-      font-weight: 500;
-    }
-    
-    .booking-step.active {
-      color: white;
-    }
-    
-    .booking-step.active .step-number {
-      background-color: white;
-      color: var(--primary);
-    }
-    
-    .booking-step.completed .step-number {
-      background-color: var(--secondary);
-      color: white;
-    }
-    
-    .booking-step.completed {
-      color: rgba(255, 255, 255, 0.9);
-    }
-    
-    .step-connector {
-      position: absolute;
-      top: 15px;
-      height: 2px;
-      background-color: rgba(255, 255, 255, 0.3);
-      width: calc(100% - 60px);
-      left: 30px;
-      z-index: 0;
-    }
-    
-    .step-progress {
-      position: absolute;
-      top: 15px;
-      height: 2px;
-      background-color: var(--secondary);
-      width: 0;
-      left: 30px;
-      transition: width 0.5s ease;
-      z-index: 1;
-    }
+/* Updated step progress styles */
+.booking-steps {
+  display: flex;
+  justify-content: space-between;
+  padding: 1.5rem 2rem;
+  background: linear-gradient(to right, var(--primary-light), var(--primary));
+  position: relative;
+}
+
+.booking-step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  z-index: 2;
+  color: rgba(255, 255, 255, 0.6);
+  width: 80px; /* Fixed width for better alignment */
+}
+
+.step-number {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  position: relative;
+  z-index: 5;
+  transition: all 0.3s ease;
+}
+
+.step-label {
+  font-size: 0.85rem;
+  font-weight: 500;
+  text-align: center;
+}
+
+.booking-step.active {
+  color: white;
+}
+
+.booking-step.active .step-number {
+  background-color: white;
+  color: var(--primary);
+  transform: scale(1.1);
+  box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.1);
+}
+
+.booking-step.completed .step-number {
+  background-color: var(--secondary);
+  color: white;
+}
+
+.booking-step.completed {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+/* Improved connector and progress bar */
+.step-connector {
+  position: absolute;
+  top: calc(1.5rem + 17px); /* Position in the middle of circles */
+  height: 4px; /* Slightly thicker */
+  background-color: rgba(255, 255, 255, 0.2);
+  left: 70px; /* Start after first circle */
+  right: 70px; /* End before last circle */
+  z-index: 1;
+  border-radius: 2px;
+}
+
+.step-progress {
+  position: absolute;
+  top: calc(1.5rem + 17px); /* Same as connector */
+  height: 4px; /* Same as connector */
+  background-color: var(--secondary);
+  left: 70px; /* Same as connector */
+  width: 0; /* Will be adjusted by JS */
+  transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1); /* Smoother animation */
+  z-index: 1;
+  border-radius: 2px;
+  box-shadow: 0 0 10px rgba(255, 109, 89, 0.5); /* Glow effect */
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+  .booking-steps {
+    padding: 1.5rem 1rem;
+  }
+  
+  .booking-step {
+    width: 60px;
+  }
+  
+  .step-label {
+    font-size: 0.75rem;
+  }
+  
+  .step-number {
+    width: 28px;
+    height: 28px;
+    font-size: 0.85rem;
+  }
+  
+  .step-connector, .step-progress {
+    top: calc(1.5rem + 14px);
+    left: 50px;
+    right: 50px;
+  }
+}
+
+@media (max-width: 576px) {
+  .booking-steps {
+    padding: 1.25rem 0.5rem;
+  }
+  
+  .booking-step {
+    width: 50px;
+  }
+  
+  .step-label {
+    font-size: 0.65rem;
+  }
+  
+  .step-number {
+    width: 24px;
+    height: 24px;
+    font-size: 0.8rem;
+    margin-bottom: 0.35rem;
+  }
+  
+  .step-connector, .step-progress {
+    top: calc(1.25rem + 12px);
+    left: 40px;
+    right: 40px;
+    height: 3px;
+  }
+}
+
+@media (max-width: 576px) {
+  .booking-steps {
+    padding: 1.25rem 0.5rem;
+  }
+  
+  .step-label {
+    font-size: 0.65rem;
+  }
+  
+  .step-number {
+    width: 22px;
+    height: 22px;
+    font-size: 0.8rem;
+    margin-bottom: 0.35rem;
+  }
+  
+  .step-connector, .step-progress {
+    top: 11px; /* Half of the even smaller circle height */
+    left: 30px;  /* Further adjusted for smaller screens */
+    right: 30px; /* Further adjusted for smaller screens */
+  }
+}
     
     .booking-body {
       padding: 2rem;
@@ -922,27 +1012,34 @@
         });
       }
       
-      // Function to update progress
-      function updateProgress(currentStep) {
-        // Update steps
-        allSteps.forEach(step => {
-          const stepNumber = parseInt(step.getAttribute('data-step'));
-          
-          if (stepNumber < currentStep) {
-            step.classList.remove('active');
-            step.classList.add('completed');
-          } else if (stepNumber === currentStep) {
-            step.classList.add('active');
-            step.classList.remove('completed');
-          } else {
-            step.classList.remove('active', 'completed');
-          }
-        });
-        
-        // Update progress bar width
-        const progressPercentage = ((currentStep - 1) / (allSteps.length - 1)) * 100;
-        stepProgress.style.width = `${progressPercentage}%`;
-      }
+      // Updated progress function for smoother behavior
+function updateProgress(currentStep) {
+  const allSteps = document.querySelectorAll('.booking-step');
+  const stepProgress = document.querySelector('.step-progress');
+  const totalSteps = allSteps.length;
+  
+  // Update step classes
+  allSteps.forEach(step => {
+    const stepNumber = parseInt(step.getAttribute('data-step'));
+    
+    if (stepNumber < currentStep) {
+      step.classList.remove('active');
+      step.classList.add('completed');
+    } else if (stepNumber === currentStep) {
+      step.classList.add('active');
+      step.classList.remove('completed');
+    } else {
+      step.classList.remove('active', 'completed');
+    }
+  });
+  
+  // Calculate progress width more accurately
+  // For 4 steps, the progress percentages would be: 0%, 33.3%, 66.6%, 100%
+  const progressPercentage = ((currentStep - 1) / (totalSteps - 1)) * 100;
+  
+  // Apply the width with animation
+  stepProgress.style.width = `${progressPercentage}%`;
+}
       
       // Show alert function
       function showAlert(title, message, type = 'info') {
