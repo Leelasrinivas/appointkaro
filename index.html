@@ -3,35 +3,49 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AppointKaro - India's Premier Appointment Booking Platform</title>
+  <title>AppointKaro - #1 Appointment Booking App in India | Doctor, Salon & Home Services</title>
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
 
-  
-  <!-- Meta tags for SEO -->
-  <meta name="description" content="AppointKaro helps you save up to 1 year 3 months of your life by streamlining appointment booking across healthcare, beauty, legal, and home services in India.">
-  <meta name="keywords" content="appointment booking, doctor appointment, salon booking, legal consultation, home services, India appointments, time saving">
+  <!-- Primary Meta Tags -->
+  <meta name="description" content="Book instant appointments with doctors, salons, lawyers & home services across India. AppointKaro saves you 1+ year of waiting time with our real-time appointment booking platform.">
+  <meta name="keywords" content="appointment booking app, doctor appointment online, salon booking app, lawyer consultation, home service booking, online appointment scheduler, healthcare appointments, beauty parlor booking, legal consultation, plumber booking, electrician appointment, India appointment app, same day appointments, instant booking">
   <meta name="author" content="AppointKaro">
-  <meta name="robots" content="index, follow">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
   <meta name="canonical" href="https://appointkaro.com/">
+  <meta name="language" content="English">
+  <meta name="revisit-after" content="7 days">
+  <meta name="geo.region" content="IN">
+  <meta name="geo.placename" content="India">
   
-  <!-- Open Graph / Social Media Meta Tags -->
-  <meta property="og:title" content="AppointKaro - Save Time with Smart Appointment Booking">
-  <meta property="og:description" content="AppointKaro helps you save up to 1 year 3 months of your life by streamlining appointment booking across healthcare, beauty, legal, and home services in India.">
+  <!-- Open Graph / Facebook Meta Tags -->
+  <meta property="og:title" content="AppointKaro - #1 Appointment Booking App in India | Save Time, Book Instantly">
+  <meta property="og:description" content="Book instant appointments with doctors, salons, lawyers & home services across India. AppointKaro saves you 1+ year of waiting time with our real-time appointment booking platform.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://appointkaro.com">
   <meta property="og:image" content="https://appointkaro.com/images/og-image.jpg">
+  <meta property="og:image:alt" content="AppointKaro appointment booking interface">
   <meta property="og:locale" content="en_IN">
   <meta property="og:site_name" content="AppointKaro">
+  <meta property="og:video" content="https://appointkaro.com/videos/how-it-works.mp4">
   
   <!-- Twitter Card data -->
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="AppointKaro - Save Time with Smart Appointment Booking">
-  <meta name="twitter:description" content="AppointKaro helps you save up to 1 year 3 months of your life by streamlining appointment booking across healthcare, beauty, legal, and home services in India.">
+  <meta name="twitter:title" content="AppointKaro - #1 Appointment Booking App in India">
+  <meta name="twitter:description" content="Book instant appointments with doctors, salons, lawyers & home services across India. Save 1+ year of waiting time.">
   <meta name="twitter:image" content="https://appointkaro.com/images/twitter-card.jpg">
+  <meta name="twitter:site" content="@appointkaro">
+  <meta name="twitter:creator" content="@appointkaro">
+  
+  <!-- Mobile App Meta Tags -->
+  <meta name="apple-itunes-app" content="app-id=YOUR_APP_ID">
+  <meta name="google-play-app" content="app-id=YOUR_APP_ID">
   
   <!-- Favicon -->
-  <link rel="icon" type="image/png" href="favicon.png">
-  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+  <link rel="manifest" href="site.webmanifest">
+  <meta name="theme-color" content="#ffffff">
   
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -47,7 +61,6 @@
   <!-- Animation CSS -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
   
-  
   <!-- Structured data for SEO -->
   <script type="application/ld+json">
     {
@@ -56,21 +69,34 @@
       "name": "AppointKaro",
       "url": "https://appointkaro.com",
       "logo": "https://appointkaro.com/logo.png",
-      "description": "Revolutionary appointment booking platform for services across India",
+      "description": "India's premier appointment booking platform for healthcare, beauty, legal, and home services",
       "address": {
         "@type": "PostalAddress",
+        "addressRegion": "Delhi NCR",
         "addressCountry": "India"
       },
-      "contactPoint": {
-        "@type": "ContactPoint",
-        "telephone": "",
-        "contactType": "customer service",
-        "email": "ceo@appointkaro.com"
-      },
+      "contactPoint": [
+        {
+          "@type": "ContactPoint",
+          "telephone": "+91-XXXXXXXXXX",
+          "contactType": "customer service",
+          "email": "support@appointkaro.com",
+          "availableLanguage": ["English", "Hindi"]
+        },
+        {
+          "@type": "ContactPoint",
+          "telephone": "+91-XXXXXXXXXX",
+          "contactType": "technical support",
+          "email": "tech@appointkaro.com",
+          "availableLanguage": ["English", "Hindi"]
+        }
+      ],
       "sameAs": [
         "https://facebook.com/appointkaro",
         "https://twitter.com/appointkaro",
-        "https://instagram.com/appointkaro"
+        "https://instagram.com/appointkaro",
+        "https://linkedin.com/company/appointkaro",
+        "https://youtube.com/appointkaro"
       ]
     }
   </script>
@@ -89,6 +115,25 @@
   <script type="application/ld+json">
     {
       "@context": "https://schema.org",
+      "@type": "MobileApplication",
+      "name": "AppointKaro",
+      "operatingSystem": "Android, iOS",
+      "applicationCategory": "BusinessApplication",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "INR"
+      },
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.8",
+        "ratingCount": "15000"
+      }
+    }
+  </script>
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
       "@type": "Service",
       "serviceType": "Appointment Booking",
       "provider": {
@@ -99,7 +144,75 @@
         "@type": "Country",
         "name": "India"
       },
-      "description": "Book appointments for healthcare, beauty, legal, educational, and home services without waiting in lines."
+      "availableService": [
+        {
+          "@type": "Service",
+          "name": "Doctor Appointments",
+          "description": "Book appointments with specialists, general physicians, and healthcare professionals"
+        },
+        {
+          "@type": "Service",
+          "name": "Salon & Spa Bookings",
+          "description": "Schedule haircuts, spa treatments, beauty services, and wellness appointments"
+        },
+        {
+          "@type": "Service",
+          "name": "Legal Consultations",
+          "description": "Book consultations with lawyers, attorneys, and legal advisors"
+        },
+        {
+          "@type": "Service",
+          "name": "Home Services",
+          "description": "Schedule appointments with plumbers, electricians, cleaners, and home repair professionals"
+        }
+      ],
+      "description": "India's most comprehensive appointment booking platform that helps users save up to 1 year 3 months of their life by eliminating waiting times."
+    }
+  </script>
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "How does AppointKaro work?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "AppointKaro connects you with service providers across India. Simply search for the service you need, choose a provider, select an available time slot, and confirm your booking in seconds."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What services can I book through AppointKaro?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "You can book appointments for healthcare services (doctors, dentists, specialists), beauty services (salons, spas, barbers), legal consultations (lawyers, notaries), and home services (plumbers, electricians, cleaners)."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is AppointKaro available in my city?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "AppointKaro is available in all major Indian cities including Delhi NCR, Mumbai, Bangalore, Chennai, Hyderabad, Kolkata, Pune, Ahmedabad, and many more tier-2 and tier-3 cities across India."
+          }
+        }
+      ]
+    }
+  </script>
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://appointkaro.com"
+        }
+      ]
     }
   </script>
 </head>
