@@ -205,6 +205,45 @@ document.addEventListener('DOMContentLoaded', function () {
 
   checkCalculatorAlert();
 
+  // Animated Counter for Statistics
+  const observerOptions = {
+    threshold: 0.5,
+    rootMargin: '0px'
+  };
+
+  const animateCounter = (element) => {
+    const target = parseInt(element.getAttribute('data-count'));
+    const duration = 2000; // 2 seconds
+    const increment = target / (duration / 16); // 60fps
+    let current = 0;
+
+    const updateCounter = () => {
+      current += increment;
+      if (current < target) {
+        element.textContent = Math.floor(current).toLocaleString();
+        requestAnimationFrame(updateCounter);
+      } else {
+        element.textContent = target.toLocaleString();
+      }
+    };
+
+    updateCounter();
+  };
+
+  const counterObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting && !entry.target.classList.contains('counted')) {
+        entry.target.classList.add('counted');
+        animateCounter(entry.target);
+        counterObserver.unobserve(entry.target);
+      }
+    });
+  }, observerOptions);
+
+  document.querySelectorAll('.stat-number').forEach(counter => {
+    counterObserver.observe(counter);
+  });
+
   // Function to calculate time saved based on age and life expectancy
   function calculateTimeSaved(age, expectancy) {
     const yearsRemaining = expectancy - age;
