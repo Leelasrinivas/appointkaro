@@ -243,6 +243,40 @@ p {
   cursor: pointer;
 }
 
+/* Floating decorative shapes */
+.floating-shape {
+  position: absolute;
+  animation: float 6s ease-in-out infinite;
+  z-index: 1;
+}
+
+.shape-1 {
+  top: 15%;
+  right: 10%;
+  animation-delay: 0s;
+}
+
+.shape-2 {
+  top: 60%;
+  left: 5%;
+  animation-delay: 2s;
+}
+
+.shape-3 {
+  bottom: 20%;
+  right: 15%;
+  animation-delay: 4s;
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-30px) rotate(10deg);
+  }
+}
+
 /* Hero section */
 .hero-section {
   padding: 10rem 0 6rem;
@@ -706,13 +740,15 @@ p {
   border-radius: var(--border-radius-lg);
   overflow: hidden;
   box-shadow: var(--shadow-md);
-  transition: all 0.3s ease;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   position: relative;
+  border: 2px solid transparent;
 }
 
 .service-card:hover {
-  transform: translateY(-10px);
-  box-shadow: var(--shadow-lg);
+  transform: translateY(-10px) scale(1.02);
+  box-shadow: 0 20px 40px rgba(121, 34, 255, 0.2);
+  border-color: var(--primary-light);
 }
 
 .service-image {
@@ -825,6 +861,77 @@ p {
 }
 
 /* Benefits Section */
+/* Statistics Section */
+.stats-section {
+  padding: 5rem 0;
+  background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+.stats-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: 
+    linear-gradient(30deg, rgba(255,255,255,0.05) 12%, transparent 12.5%, transparent 87%, rgba(255,255,255,0.05) 87.5%, rgba(255,255,255,0.05)),
+    linear-gradient(150deg, rgba(255,255,255,0.05) 12%, transparent 12.5%, transparent 87%, rgba(255,255,255,0.05) 87.5%, rgba(255,255,255,0.05));
+  background-size: 80px 140px;
+  opacity: 0.3;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 3rem;
+  position: relative;
+  z-index: 2;
+}
+
+.stat-card {
+  text-align: center;
+  color: var(--white);
+  padding: 2rem 1rem;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border-radius: var(--border-radius-lg);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  transition: all 0.3s ease;
+}
+
+.stat-card:hover {
+  transform: translateY(-10px) scale(1.05);
+  background: rgba(255, 255, 255, 0.15);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+}
+
+.stat-icon {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  opacity: 0.9;
+}
+
+.stat-number {
+  font-size: 3rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  background: linear-gradient(to right, var(--white), rgba(255, 255, 255, 0.8));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.stat-label {
+  font-size: 1rem;
+  opacity: 0.9;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
 .benefits-section {
   padding: 6rem 0;
   background-color: rgba(121, 34, 255, 0.03);
@@ -1185,6 +1292,8 @@ p {
   font-size: 0.875rem;
   color: var(--gray-600);
 }
+
+
 
 /* About Section */
 .about-section {
@@ -1664,30 +1773,67 @@ p {
     display: none;
   }
   
+  .main-nav.show .nav-list {
+    display: flex;
+    flex-direction: column;
+  }
+  
   .mobile-menu-btn {
     display: block;
   }
   
   .hero-title {
     font-size: 2.5rem;
+    text-align: center;
   }
   
   .hero-description {
     font-size: 1rem;
+    text-align: center;
   }
   
   .hero-buttons {
     flex-direction: column;
-    width: 100%;
+    align-items: stretch;
   }
   
   .hero-buttons a {
     width: 100%;
-    text-align: center;
+    justify-content: center;
+  }
+  
+  .stats-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+  }
+  
+  .stat-number {
+    font-size: 2rem;
+  }
+  
+  .stat-icon {
+    font-size: 2rem;
+  }
+  
+  .stat-label {
+    font-size: 0.85rem;
+  }
+  
+  .floating-shape {
+    display: none;
   }
   
   .notify-form .form-group {
     flex-direction: column;
+  }
+  
+  .stats-grid {
+    gap: 1rem;
+    padding: 0 0.5rem;
+  }
+  
+  .stat-card {
+    padding: 1.5rem 1rem;
   }
 }
 
@@ -1702,6 +1848,15 @@ p {
   
   .hero-title {
     font-size: 2rem;
+  }
+  
+  .stats-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  
+  .stat-number {
+    font-size: 2.5rem;
   }
   
   .hero-device {
@@ -1758,14 +1913,16 @@ p {
   top: 70px;
   left: 0;
   width: 100%;
-  background-color: #fff;
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  background: linear-gradient(135deg, rgba(255,255,255,0.98) 0%, rgba(243,244,246,0.98) 100%);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 10px 30px rgba(121, 34, 255, 0.15);
   padding: 20px;
   opacity: 0;
   visibility: hidden;
   transform: translateY(-20px);
-  transition: all 0.3s ease;
+  transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
   z-index: 1000;
+  border-radius: 0 0 1rem 1rem;
 }
 
 .header .main-nav.show {
@@ -1786,10 +1943,17 @@ p {
 
 .header .nav-list li a {
   display: block;
-  padding: 12px 0;
+  padding: 14px 20px;
   text-align: center;
   font-size: 16px;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  border-bottom: 1px solid rgba(121, 34, 255, 0.1);
+  border-radius: 0.5rem;
+  transition: all 0.3s ease;
+}
+
+.header .nav-list li a:hover {
+  background: linear-gradient(to right, rgba(121, 34, 255, 0.1), rgba(255, 109, 89, 0.1));
+  transform: translateX(5px);
 }
 
 .mobile-menu-btn {
@@ -1826,3 +1990,134 @@ p {
   display: none;
 }
 }
+
+
+/* ============================================
+   FIX: Perfect alignment for calculator section
+============================================ */
+
+.calculator-section {
+  position: relative;
+  padding: 6rem 0;
+  background: linear-gradient(180deg, #ffffff 0%, #fafaff 100%);
+}
+
+.calculator-flex {
+  display: flex;
+  align-items: flex-start; /* Align both boxes at the top edge */
+  justify-content: center;
+  gap: 3rem;
+  flex-wrap: wrap;
+  position: relative;
+  z-index: 2;
+}
+
+/* Left: Calculator card */
+.calculator-card {
+  flex: 1;
+  min-width: 360px;
+  max-width: 420px;
+  background: #fff;
+  border-radius: 20px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+  padding: 2rem 2.2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+/* Title alignment fix */
+.calculator-title {
+  text-align: center;
+  font-size: 1.5rem;
+  color: #111;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  margin-top: 0.3rem; /* reduce top gap */
+}
+
+/* Right: Calendar visual */
+.calculator-visual {
+  flex: 1;
+  min-width: 360px;
+  max-width: 420px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+  transform: translateY(4px); /* small optical adjustment */
+}
+
+/* Calendar box */
+.calendar-container {
+  background: #fff;
+  border-radius: 20px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+  width: 100%;
+  padding: 0 1.5rem 1.5rem;
+}
+
+/* Header styling (keep gradient flush with top edge) */
+.calendar-header {
+  background: linear-gradient(90deg, #7b2ff7 0%, #f107a3 100%);
+  color: #fff;
+  border-radius: 20px 20px 0 0;
+  text-align: center;
+  font-weight: 600;
+  padding: 1rem;
+  margin: 0 -1.5rem 1.2rem -1.5rem; /* remove extra spacing */
+}
+
+/* Remove unwanted gaps in the days grid */
+.calendar-weekdays,
+.calendar-days {
+  margin: 0;
+}
+
+/* Stats boxes under calendar */
+.time-stats {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+  width: 100%;
+}
+
+.time-stat-item {
+  flex: 1;
+  min-width: 100px;
+  background: #fff;
+  border-radius: 15px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+  text-align: center;
+  padding: 1rem;
+}
+
+.time-number {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #7b2ff7;
+}
+
+.time-label {
+  color: #555;
+  font-size: 0.9rem;
+}
+
+/* Responsive adjustments */
+@media (max-width: 992px) {
+  .calculator-flex {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .calculator-card,
+  .calculator-visual {
+    max-width: 90%;
+  }
+
+  .calculator-visual {
+    transform: none;
+  }
+}
+
