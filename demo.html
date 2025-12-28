@@ -2,14 +2,13 @@
 <html lang="en">
 <head>
   <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-TR4B8L0X78"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-TR4B8L0X78');
-</script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-TR4B8L0X78"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-TR4B8L0X78');
+  </script>
   
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -88,6 +87,7 @@
       height: 100%;
       z-index: 1;
       overflow: hidden;
+      pointer-events: none;
     }
     
     .gradient-orb {
@@ -199,169 +199,95 @@
       box-shadow: var(--shadow-lg);
       overflow: hidden;
     }
-    
-/* Updated step progress styles */
-.booking-steps {
-  display: flex;
-  justify-content: space-between;
-  padding: 1.5rem 2rem;
-  background: linear-gradient(to right, var(--primary-light), var(--primary));
-  position: relative;
-}
 
-.booking-step {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  position: relative;
-  z-index: 2;
-  color: rgba(255, 255, 255, 0.6);
-  width: 80px; /* Fixed width for better alignment */
-}
+    /* Fixed step progress styles */
+    .booking-steps {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 2rem 2rem;
+      background: linear-gradient(to right, var(--primary-light), var(--primary));
+      position: relative;
+    }
 
-.step-number {
-  width: 34px;
-  height: 34px;
-  border-radius: 50%;
-  background-color: rgba(255, 255, 255, 0.2);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: 600;
-  margin-bottom: 0.5rem;
-  position: relative;
-  z-index: 5;
-  transition: all 0.3s ease;
-}
+    .booking-step {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+      z-index: 2;
+      color: rgba(255, 255, 255, 0.6);
+      flex: 1;
+    }
 
-.step-label {
-  font-size: 0.85rem;
-  font-weight: 500;
-  text-align: center;
-}
+    .step-number {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background-color: rgba(255, 255, 255, 0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      position: relative;
+      z-index: 5;
+      transition: all 0.3s ease;
+      font-size: 1rem;
+    }
 
-.booking-step.active {
-  color: white;
-}
+    .step-label {
+      font-size: 0.85rem;
+      font-weight: 500;
+      text-align: center;
+      white-space: nowrap;
+    }
 
-.booking-step.active .step-number {
-  background-color: white;
-  color: var(--primary);
-  transform: scale(1.1);
-  box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.1);
-}
+    .booking-step.active {
+      color: white;
+    }
 
-.booking-step.completed .step-number {
-  background-color: var(--secondary);
-  color: white;
-}
+    .booking-step.active .step-number {
+      background-color: white;
+      color: var(--primary);
+      transform: scale(1.15);
+      box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.2);
+    }
 
-.booking-step.completed {
-  color: rgba(255, 255, 255, 0.9);
-}
+    .booking-step.completed .step-number {
+      background-color: var(--secondary);
+      color: white;
+    }
 
-/* Improved connector and progress bar */
-.step-connector {
-  position: absolute;
-  top: calc(1.5rem + 17px); /* Position in the middle of circles */
-  height: 4px; /* Slightly thicker */
-  background-color: rgba(255, 255, 255, 0.2);
-  left: 70px; /* Start after first circle */
-  right: 70px; /* End before last circle */
-  z-index: 1;
-  border-radius: 2px;
-}
+    .booking-step.completed {
+      color: rgba(255, 255, 255, 0.9);
+    }
 
-.step-progress {
-  position: absolute;
-  top: calc(1.5rem + 17px); /* Same as connector */
-  height: 4px; /* Same as connector */
-  background-color: var(--secondary);
-  left: 70px; /* Same as connector */
-  width: 0; /* Will be adjusted by JS */
-  transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1); /* Smoother animation */
-  z-index: 1;
-  border-radius: 2px;
-  box-shadow: 0 0 10px rgba(255, 109, 89, 0.5); /* Glow effect */
-}
+    /* Improved connector line */
+    .step-connector {
+      position: absolute;
+      top: 2rem;
+      left: calc(12.5% + 20px);
+      right: calc(12.5% + 20px);
+      height: 3px;
+      background-color: rgba(255, 255, 255, 0.2);
+      z-index: 1;
+      border-radius: 2px;
+    }
 
-/* Mobile Responsiveness */
-@media (max-width: 768px) {
-  .booking-steps {
-    padding: 1.5rem 1rem;
-  }
-  
-  .booking-step {
-    width: 60px;
-  }
-  
-  .step-label {
-    font-size: 0.75rem;
-  }
-  
-  .step-number {
-    width: 28px;
-    height: 28px;
-    font-size: 0.85rem;
-  }
-  
-  .step-connector, .step-progress {
-    top: calc(1.5rem + 14px);
-    left: 50px;
-    right: 50px;
-  }
-}
-
-@media (max-width: 576px) {
-  .booking-steps {
-    padding: 1.25rem 0.5rem;
-  }
-  
-  .booking-step {
-    width: 50px;
-  }
-  
-  .step-label {
-    font-size: 0.65rem;
-  }
-  
-  .step-number {
-    width: 24px;
-    height: 24px;
-    font-size: 0.8rem;
-    margin-bottom: 0.35rem;
-  }
-  
-  .step-connector, .step-progress {
-    top: calc(1.25rem + 12px);
-    left: 40px;
-    right: 40px;
-    height: 3px;
-  }
-}
-
-@media (max-width: 576px) {
-  .booking-steps {
-    padding: 1.25rem 0.5rem;
-  }
-  
-  .step-label {
-    font-size: 0.65rem;
-  }
-  
-  .step-number {
-    width: 22px;
-    height: 22px;
-    font-size: 0.8rem;
-    margin-bottom: 0.35rem;
-  }
-  
-  .step-connector, .step-progress {
-    top: 11px; /* Half of the even smaller circle height */
-    left: 30px;  /* Further adjusted for smaller screens */
-    right: 30px; /* Further adjusted for smaller screens */
-  }
-}
+    /* Progress bar animation */
+    .step-progress {
+      position: absolute;
+      top: 2rem;
+      left: calc(12.5% + 20px);
+      height: 3px;
+      background-color: var(--secondary);
+      z-index: 2;
+      border-radius: 2px;
+      box-shadow: 0 0 8px rgba(255, 109, 89, 0.5);
+      transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      width: 0;
+    }
     
     .booking-body {
       padding: 2rem;
@@ -458,9 +384,10 @@
       text-align: center;
       cursor: pointer;
       transition: all 0.3s ease;
+      font-weight: 500;
     }
     
-    .time-slot:hover {
+    .time-slot:hover:not(.disabled) {
       border-color: var(--primary-light);
       background-color: rgba(121, 34, 255, 0.05);
     }
@@ -495,6 +422,7 @@
       border-radius: var(--border-radius);
       font-size: 1rem;
       transition: border-color 0.3s ease;
+      font-family: var(--font-family);
     }
     
     .form-control:focus {
@@ -503,16 +431,23 @@
       box-shadow: 0 0 0 3px rgba(121, 34, 255, 0.1);
     }
     
+    textarea.form-control {
+      resize: vertical;
+      min-height: 100px;
+    }
+    
     .booking-actions {
       display: flex;
       justify-content: space-between;
       margin-top: 2rem;
+      gap: 1rem;
     }
     
     .btn {
       display: inline-flex;
       align-items: center;
       justify-content: center;
+      gap: 0.5rem;
       padding: 0.75rem 1.5rem;
       border-radius: var(--border-radius);
       font-weight: 500;
@@ -520,6 +455,7 @@
       cursor: pointer;
       border: none;
       text-decoration: none;
+      font-size: 1rem;
     }
     
     .btn-primary {
@@ -536,11 +472,11 @@
     .btn-secondary {
       background-color: white;
       color: var(--primary);
-      border: 1px solid var(--primary);
+      border: 2px solid var(--primary);
     }
     
     .btn-secondary:hover {
-      background-color: var(--gray-100);
+      background-color: rgba(121, 34, 255, 0.05);
     }
     
     .booking-confirmation {
@@ -559,6 +495,21 @@
       justify-content: center;
       font-size: 2rem;
       margin: 0 auto 2rem;
+      animation: successPulse 0.6s ease-in-out;
+    }
+    
+    @keyframes successPulse {
+      0% {
+        transform: scale(0);
+        opacity: 0;
+      }
+      50% {
+        transform: scale(1.1);
+      }
+      100% {
+        transform: scale(1);
+        opacity: 1;
+      }
     }
     
     .confirmation-title {
@@ -586,6 +537,10 @@
     .detail-group {
       display: flex;
       margin-bottom: 1rem;
+    }
+    
+    .detail-group:last-child {
+      margin-bottom: 0;
     }
     
     .detail-label {
@@ -674,16 +629,42 @@
       font-size: 1.1rem;
       color: var(--gray-500);
       cursor: pointer;
+      padding: 0;
+      width: 24px;
+      height: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .demo-alert-close:hover {
+      color: var(--gray-700);
     }
     
     /* Mobile Responsiveness */
     @media (max-width: 768px) {
       .booking-steps {
-        padding: 1rem;
+        padding: 1.5rem 1rem;
+      }
+      
+      .booking-step {
+        min-width: 70px;
+      }
+      
+      .step-number {
+        width: 35px;
+        height: 35px;
+        font-size: 0.9rem;
       }
       
       .step-label {
         font-size: 0.75rem;
+      }
+      
+      .step-connector,
+      .step-progress {
+        left: calc(12.5% + 17.5px);
+        right: calc(12.5% + 17.5px);
       }
       
       .specialist-grid {
@@ -710,6 +691,11 @@
       .success-actions .btn {
         width: 100%;
       }
+      
+      .time-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 0.75rem;
+      }
     }
     
     @media (max-width: 576px) {
@@ -723,8 +709,33 @@
         font-size: 1.25rem;
       }
       
+      .booking-steps {
+        padding: 1.25rem 0.5rem;
+      }
+      
+      .booking-step {
+        min-width: 60px;
+      }
+      
+      .step-number {
+        width: 30px;
+        height: 30px;
+        font-size: 0.85rem;
+      }
+      
+      .step-label {
+        font-size: 0.7rem;
+      }
+      
+      .step-connector,
+      .step-progress {
+        left: calc(12.5% + 15px);
+        right: calc(12.5% + 15px);
+        height: 2px;
+      }
+      
       .time-grid {
-        grid-template-columns: repeat(3, 1fr);
+        grid-template-columns: repeat(2, 1fr);
       }
     }
   </style>
@@ -967,6 +978,9 @@
           
           // Update progress
           updateProgress(nextStep);
+          
+          // Scroll to top
+          window.scrollTo({ top: 0, behavior: 'smooth' });
         });
       });
       
@@ -984,6 +998,9 @@
           
           // Update progress
           updateProgress(prevStep);
+          
+          // Scroll to top
+          window.scrollTo({ top: 0, behavior: 'smooth' });
         });
       });
       
@@ -991,19 +1008,6 @@
       const addToCalendarBtn = document.getElementById('addToCalendarBtn');
       if (addToCalendarBtn) {
         addToCalendarBtn.addEventListener('click', function() {
-          // Create calendar event details
-          const appointmentDate = new Date(2025, 4, 19, 15, 30); // May 19, 2025, 3:30 PM
-          const endTime = new Date(appointmentDate.getTime() + 30 * 60000); // 30 minutes later
-          
-          const event = {
-            title: 'Doctor Appointment: Dr. Sharma',
-            location: 'Apollo Clinic, Bandra West, Mumbai',
-            description: 'Regular health checkup and consultation for mild fever',
-            start: appointmentDate.toISOString(),
-            end: endTime.toISOString()
-          };
-          
-          // Show success alert
           showAlert('Calendar Event Added', 'Your appointment has been added to your calendar.', 'success');
         });
       }
@@ -1022,34 +1026,35 @@
         });
       }
       
-      // Updated progress function for smoother behavior
-function updateProgress(currentStep) {
-  const allSteps = document.querySelectorAll('.booking-step');
-  const stepProgress = document.querySelector('.step-progress');
-  const totalSteps = allSteps.length;
-  
-  // Update step classes
-  allSteps.forEach(step => {
-    const stepNumber = parseInt(step.getAttribute('data-step'));
-    
-    if (stepNumber < currentStep) {
-      step.classList.remove('active');
-      step.classList.add('completed');
-    } else if (stepNumber === currentStep) {
-      step.classList.add('active');
-      step.classList.remove('completed');
-    } else {
-      step.classList.remove('active', 'completed');
-    }
-  });
-  
-  // Calculate progress width more accurately
-  // For 4 steps, the progress percentages would be: 0%, 33.3%, 66.6%, 100%
-  const progressPercentage = ((currentStep - 1) / (totalSteps - 1)) * 100;
-  
-  // Apply the width with animation
-  stepProgress.style.width = `${progressPercentage}%`;
-}
+      // Updated progress function
+      function updateProgress(currentStep) {
+        const totalSteps = allSteps.length;
+        
+        // Update step classes
+        allSteps.forEach(step => {
+          const stepNumber = parseInt(step.getAttribute('data-step'));
+          
+          if (stepNumber < currentStep) {
+            step.classList.remove('active');
+            step.classList.add('completed');
+          } else if (stepNumber === currentStep) {
+            step.classList.add('active');
+            step.classList.remove('completed');
+          } else {
+            step.classList.remove('active', 'completed');
+          }
+        });
+        
+        // Calculate progress width
+        const progressPercentage = ((currentStep - 1) / (totalSteps - 1)) * 100;
+        
+        // Get connector width
+        const connector = document.querySelector('.step-connector');
+        const connectorWidth = connector.offsetWidth;
+        
+        // Apply the width with animation
+        stepProgress.style.width = `${(progressPercentage / 100) * connectorWidth}px`;
+      }
       
       // Show alert function
       function showAlert(title, message, type = 'info') {
