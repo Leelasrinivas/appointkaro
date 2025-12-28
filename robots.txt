@@ -1,14 +1,50 @@
+# robots.txt for SaveTm
+# https://savetm.com/robots.txt
+
+# Allow all search engines to crawl the site
 User-agent: *
 Allow: /
 
-# Allow all search engines to access the site
-User-agent: *
-Disallow:
-
-# Sitemap location
-Sitemap: https://appointkaro.com/sitemap.xml
-
-# Disallow crawling of admin sections
-User-agent: *
+# Disallow admin and private sections
 Disallow: /admin/
 Disallow: /wp-admin/
+Disallow: /private/
+Disallow: /api/
+Disallow: /cgi-bin/
+
+# Allow CSS and JS files for better rendering
+Allow: /css/
+Allow: /js/
+Allow: /styles/
+Allow: /scripts/
+
+# Allow images and media
+Allow: /images/
+Allow: /media/
+Allow: /assets/
+
+# Sitemap location
+Sitemap: https://savetm.com/sitemap.xml
+
+# Crawl-delay (optional - use only if needed)
+# Crawl-delay: 1
+
+# Specific bot configurations (optional)
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+# Block bad bots (optional)
+User-agent: AhrefsBot
+Crawl-delay: 10
+
+User-agent: SemrushBot
+Crawl-delay: 10
+
+User-agent: MJ12bot
+Disallow: /
+
+User-agent: DotBot
+Disallow: /
